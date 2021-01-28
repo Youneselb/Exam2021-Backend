@@ -21,6 +21,7 @@ import javax.persistence.NamedQuery;
  */
 @Entity
 @NamedQuery(name = "Klasse.deleteAllRows", query = "DELETE from Klasse")
+@NamedQuery(name = "Klasse.findById", query = "SELECT k FROM Klasse k WHERE k.id = :id")
 public class Klasse implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,8 +34,8 @@ public class Klasse implements Serializable {
     @ManyToOne
     private Course course;
 
-//     @ManyToMany(cascade = CascadeType.PERSIST)
-//     private Teacher teacher;
+    
+   
     
      public Klasse() {
     }

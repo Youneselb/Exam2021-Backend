@@ -18,12 +18,14 @@ public class CourseDTO {
  
     private String courseName;
     private String courseDescription;
+    private long id;
 
      private static EntityManagerFactory emf;
     //se constructor
     public CourseDTO(Course course) {
         this.courseName = course.getCourseName();
         this.courseDescription = course.getCourseDescription();
+        this.id = course.getId();
     }
 
     public String getCourseName() {

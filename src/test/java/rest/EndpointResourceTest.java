@@ -57,7 +57,7 @@ public class EndpointResourceTest {
 
         httpServer.shutdownNow();
     }
-}
+
     // Setup the DataBase (used by the test-server and this test) in a known state BEFORE EACH TEST
     //TODO -- Make sure to change the EntityClass used below to use YOUR OWN (renamed) Entity class
 //    @BeforeEach
@@ -219,14 +219,13 @@ public class EndpointResourceTest {
 //                .body("message", equalTo("Not authenticated - do login"));
 //    }
 
-//    @Test
-//    public void getAllCourseTest() {
-//        given()
-//                .contentType("application/json")
-//                .when()
-//                .get("/course/getall").then()
-//                .statusCode(200);
-//
-//    }
-//
-//}
+    @Test
+    public void getAllCourseTest() {
+        given()
+                .contentType("application/json")
+                .when()
+                .get("/course/getall").then()
+                .statusCode(200);
+
+    }
+}

@@ -3,8 +3,11 @@ package utils;
 import entities.Course;
 import entities.Klasse;
 import entities.Role;
+import entities.Teacher;
 import entities.User;
 import facades.CourseFacade;
+import facades.KlasseFacade;
+import facades.TeacherFacade;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -21,6 +24,8 @@ public class SetupTestUsers {
     EntityManager em = emf.createEntityManager();
  //   KlasseFacade KlasseFACADE = KlasseFacade.getKlasseFacade(emf);
     CourseFacade CourseFACADE = CourseFacade.getCourseFacade(emf);
+    KlasseFacade KlasseFACADE = KlasseFacade.getKlasseFacade(emf);
+    TeacherFacade TeacherFACADE = TeacherFacade.getTeacherFacade(emf);
   
     
  
@@ -29,6 +34,12 @@ public class SetupTestUsers {
     User user = new User("bobby", "bobby");
     User admin = new User("admin", "test1");
     User both = new User("user_admin", "test1");
+    Course course1 = new Course("java","java");
+    Course course2 = new Course("Python", "Learn to programme with Python");
+    Klasse klasse = new Klasse(1,20, course1);
+    Teacher teacher = new Teacher("Thomas","thomas@somewhere");
+   
+    
    // user.setUserInfo(new UserInfo("Erik Larsen",33,75.5));
    // admin.setUserInfo(new UserInfo("Lars Larsen",33,75.5));
    // both.setUserInfo(new UserInfo("Henrik Larsen",33,75.5));
@@ -56,13 +67,16 @@ public class SetupTestUsers {
     em.persist(user);
     em.persist(admin);
     em.persist(both);
-   // em.persist(abc);
-  //  em.persist(sport);
+    em.persist(course1);
+    em.persist(course2);
+    em.persist(klasse);
+    em.persist(teacher);
     em.getTransaction().commit();
     System.out.println("PW: " + user.getUserPass());
     System.out.println("Testing user with OK password: " + user.verifyPassword("test"));
     System.out.println("Testing user with wrong password: " + user.verifyPassword("test1"));
     System.out.println("Created TEST Users");
     
-  }
+  
+}
 }

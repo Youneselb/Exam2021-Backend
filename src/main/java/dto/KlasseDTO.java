@@ -15,11 +15,16 @@ public class KlasseDTO {
     
     private int semester;
     private int numberOfStudents;
+    private long id;
+    
 
     //se constructor
     public KlasseDTO(Klasse k) {
-        this.semester = semester;
-        this.numberOfStudents = numberOfStudents;
+        this.semester = k.getSemester();
+        this.numberOfStudents = k.getNumberOfStudents();
+        this.id = k.getId();
+        
+        
     }
 
     public int getSemester() {
@@ -37,7 +42,8 @@ public class KlasseDTO {
     public void setNumberOfStudents(int numberOfStudents) {
         this.numberOfStudents = numberOfStudents;
     }
+
     
-    
+   
     
 }

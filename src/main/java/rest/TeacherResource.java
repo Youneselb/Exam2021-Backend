@@ -8,9 +8,11 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entities.Course;
+import entities.Teacher;
 import entities.User;
 import errorhandling.API_Exception;
 import facades.CourseFacade;
+import facades.TeacherFacade;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -37,43 +39,32 @@ import utils.EMF_Creator;
  *
  * @author Yones
  */
-@Path("course")
-public class CourseResource {
+@Path("teacher")
+public class TeacherResource {
     
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-   private static final CourseFacade CourseFACADE =  CourseFacade.getCourseFacade(EMF);
+   private static final TeacherFacade TeacherFACADE =  TeacherFacade.getTeacherFacade(EMF);
 
 
-   @Path("getall")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getCourses() {
-    return GSON.toJson(CourseFACADE.getAllCourses());
-    }
-    
    @POST
    @Produces(MediaType.APPLICATION_JSON)
    @Consumes({MediaType.APPLICATION_JSON})
-    @Path("newcourse")
+    @Path("newteacher")
    @RolesAllowed("admin")
    
-    public String addCourse(String addcourse) throws AuthenticationException {
-          Course courseToAdd = GSON.fromJson(addcourse, Course.class);
-          Course addedCourse = CourseFACADE.addNewCourse(courseToAdd);
-                return "{\"msg\": \"Course added  \"}";
+    public String addTeacher(String addteacher) throws AuthenticationException {
+          Teacher teacherToAdd = GSON.fromJson(addteacher, Teacher.class);
+          Teacher addedTeacher = TeacherFACADE.addNewTeacher(teacherToAdd);
+                return "{\"msg\": \"Teacher added  \"}";
     }
      
-//     @PUT
-//    @Path("update/{id}")
-//      @RolesAllowed("user")
-//    @Produces({MediaType.APPLICATION_JSON})
-//    @Consumes({MediaType.APPLICATION_JSON})
-//    public String updatePerson(@PathParam("id") Long id, String activity) throws API_Exception{
-//     return courseFacade.editCourse(id,GSON.fromJson(course, Course.class));
-//}
-  
-
+// @Path("getallteachers")
+//    @GET
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public String getTeachers() {
+//    return GSON.toJson(TeacherFACADE.getAllTeachers());
+//    }
     
 }
     

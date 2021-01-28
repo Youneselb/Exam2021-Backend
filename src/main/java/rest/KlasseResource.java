@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -15,6 +15,7 @@ import facades.KlasseFacade;
 import java.io.IOException;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -45,11 +46,15 @@ public class KlasseResource {
    
     @POST
    @Produces(MediaType.APPLICATION_JSON)
+     @Consumes({MediaType.APPLICATION_JSON})
     @Path("newklasse")
    @RolesAllowed("admin")
    
     public String addKlasse(String addklasse) throws AuthenticationException {
-          Klasse klasseToAdd = GSON.fromJson(addklasse, Klasse.class);
+        System.out.println(addklasse);  
+        Klasse klasseToAdd = GSON.fromJson(addklasse, Klasse.class);
+          System.out.println(klasseToAdd.getNumberOfStudents());
+          
           Klasse addedKlasse = KlasseFACADE.addNewKlasse(klasseToAdd);
                 return "{\"msg\": \"Class added  \"}";
     }

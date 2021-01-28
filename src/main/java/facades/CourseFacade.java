@@ -80,16 +80,17 @@ public class CourseFacade {
 
 
     }
-       public String editCourse(long id, Course course) throws API_Exception{
-       EntityManager em = emf.createEntityManager();
+      public String editCourse(long id, Course course) throws API_Exception{
+       
+     EntityManager em = emf.createEntityManager();
        
        try {
             em.getTransaction().begin();
             
            Course c = em.find(Course.class, id);
+           c.setId(course.getId());
            c.setCourseName(course.getCourseName());
            c.setCourseDescription(course.getCourseDescription());
-           
              em.getTransaction().commit();
        } catch (Exception e){
            
@@ -100,6 +101,11 @@ public class CourseFacade {
        }
        
        return "complete";
-   } 
+   
+
+
+
+
+}
         
     }

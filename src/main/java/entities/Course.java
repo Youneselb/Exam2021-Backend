@@ -14,13 +14,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Yones
  */
 @Entity
+
 @NamedQuery(name = "Course.deleteAllRows", query = "DELETE from Course")
+@NamedQuery(name = "Course.findById", query = "SELECT c FROM Course c WHERE c.id = :id")
 public class Course implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -34,7 +37,19 @@ public class Course implements Serializable {
 //NOTE: Mapped by skal være på "one" siden ("many" siden indeholder fremmednøglen og er dermed ejersiden)
     @OneToMany(mappedBy= "Course", cascade= CascadeType.PERSIST)
  private List<Klasse> Klasser;
+    
+    @OneToOne
+    private Teacher teacher;
 
+     public void addKlasse(Klasse klasse){
+    this.Klasser.add(klasse);
+    if (klasse != null){
+    klasse.setCourse(this);
+    }
+    }
+    
+    
+    
     public Course() {
     }
 
